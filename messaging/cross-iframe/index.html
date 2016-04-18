@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="web前端学习实例页面 web通信之跨文档通信" /> 
+<style> 
+.part {
+    float: left;
+    min-height: 200px;
+    width: 500px;
+    _height: 500px;
+    background: white;
+    margin:10px;
+}
+.part iframe {
+    width: 100%;
+    height: 200px;
+    border: 1px inset #333;
+} 
+.main {height: 240px;}
+body {border:2px solid #cdcdcd;}
+</style>
+</head> 
+<body> 
+<div class="main"> 
+  <div class="part">
+      <iframe src="post.html"></iframe>
+  </div>
+  <div class="part">
+      <iframe src="get.html"></iframe>
+  </div> 
+</div>
+
+</body>
+</html>

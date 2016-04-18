@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Channel-Index" /> 
+<style> 
+.demo {padding: 10px;}
+.part {
+    float: left;
+    min-height: 200px;
+    width: 500px;
+    _height: 500px;
+    background: white;
+    margin:10px;
+}
+.part iframe {
+    width: 100%;
+    height: 200px;
+    border: 1px inset #333;
+}
+.main {height: 240px;}
+body {border:2px solid #cdcdcd;}
+</style>
+</head> 
+<body> 
+<div class="main">
+    <div class="part">
+        <iframe src="post.html"></iframe>
+    </div>
+    <div class="part">
+        <iframe src="get.html"></iframe>
+    </div>
+</div>
+<script>
+//MessageChannel对象:
+//MessagePort(postMessage().start().close().onmessage属性)
+//继承DOM事件接口，属性共享。但是该事件没有冒泡，无法取消，也没有默认行为
+// 监听从右侧框架传来的信息
+window.addEventListener('message', function(evt) {
+    if (evt.origin == 'http://localhost') {
+        if ( evt.ports.length > 0 ) {
+            // 将端口转移到其他文档
+            window.frames[0].postMessage('端口打开','http://localhost', evt.ports);
+        }
+    }    
+}, false);
+</script>
+</body>
+</html>

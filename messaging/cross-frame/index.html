@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Cross-Frame" /> 
+<style> 
+.main {height: 240px;}
+body {border:2px solid #cdcdcd;}
+</style>
+</head> 
+<body> 
+<div id="J_main" class="main">
+  <a target="_blank" href="get.html" id="J_boy">男生点这个</a>
+  <a target="_blank" href="get.html" id="J_girl">女生点这个</a>
+</div>
+
+<script>
+var message = '';
+document.querySelector("#J_boy").onclick = function() {
+    message = '我是男生，帅气的男生！';
+};
+document.querySelector("#J_girl").onclick = function() {
+    message = '我是女生，漂亮的女生！';
+};
+window.addEventListener('message', function(e) {
+    var interval;
+    // 检测来源
+    if (e.origin == 'http://localhost')
+        switch (e.data) {
+            case 'ready': // e.source 为发送的 window 对象
+                interval = setTimeout(function(win) {// 
+                    win.postMessage(message,'http://localhost');    
+                }, 2000, e.source);//e.source-->win (上下文完成切换)
+                console.log('ready');
+                break; 
+            case 'closed':
+                clearInterval(interval);
+                console.log('closed');
+                break;
+    }
+ }, false);
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Cross-Frame" /> 
+<style> 
+</style>
+</head> 
+<body> 
+<div id="J_message" class="p20">接受的信息将在2s后呈现</div>
+
+<script>
+window.addEventListener('message', function(e) {
+    document.querySelector("#J_message").innerHTML = "接受到的信息是：" + e.data;
+}, false);
+
+// 当文档加载完毕, 给父级来源发送信息。
+window.addEventListener('load', function(e){
+    e.currentTarget.opener.postMessage('ready', 'http://localhost');
+}, false);
+
+// 当窗体关闭，告诉父级窗体已经关闭了。
+window.addEventListener('unload', function(e){
+    e.currentTarget.opener.postMessage('closed', 'http://localhost');
+}, false);
+</script>
+</body>
+</html>

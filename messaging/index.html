@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="webMessaging" /> 
+<title>web通信之跨文档通信实例页面</title>
+<style>
+    .title{font-family: "微软雅黑";}
+    .demo{margin: 20px 0;}
+    iframe {height:100%;}
+    section{margin:20px 0;height:250px;display:flex;flex-direction:column;}
+    .d-body{height:260px;}
+</style>
+</head> 
+<body> 
+<header class="title">
+    <h1>API: webMessaging</h1>  
+    <h3>基础知识</h3> 
+    <span>
+    MessageEvent事件定义:(data.origin.lastEventId.source.ports)
+    继承DOM事件接口，属性共享。但是该事件没有冒泡，无法取消，也没有默认行为
+    </span>
+    <p>安全性：1、检测domain； 2、检测</p>
+</header>
+ 
+<div class="demo">
+    <section id="J_crossFrame" class=""> 
+        <a class="d-head" href="./cross-frame/index.html">Cross-Frame</a>
+     </section>
+    <section id="J_crossIframe" class="">
+        <a class="d-head" href="./cross-iframe/index.html">Cross-Iframe</a>
+    </section> 
+    <section id="J_channel" class="">
+        <a class="d-head" href="./channel/index.html">Channel</a>
+    </section>
+</div>
+
+<script>
+ 
+</script>
+</body>
+</html> 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="description" content="web通信之跨文档通信-GET" />
+  <style type="text/css">  
+  </style>
+</head>
+<body>
+<div id="J_show">信息接受区域</div> 
+<script type="text/javascript">
+  var message = "Hello there",
+    showBox = document.querySelector("#J_show"),
+    messageHandle = function(e) {
+      showBox.innerHTML = "Message Received: " + e.data + "<br/> from: " + event.origin;
+  };
+  if (window.addEventListener) { 
+      window.addEventListener("message", messageHandle, false);
+  } else if (window.attachEvent) { 
+      window.attachEvent('onmessage', messageHandle);
+  } 
+</script>
+</body>
+</html>

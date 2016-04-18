@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Channel-Post" /> 
+<style> 
+</style>
+</head> 
+<body>  
+<div class="main">
+  <form>
+    <input type="text" class="input_l pct60" placeholder="随便写点什么" required="" autofocus="">
+    <input type="submit" class="f14" value="确认">
+  </form>
+</div>
+<script>
+var eleForm = document.querySelector("form"), port;
+eleForm.onsubmit = function() {
+  var message = document.querySelector("input[type='text']").value;
+  
+  if (port === undefined) {
+    alert('信息发送失败，目前没有可用端口！');
+  } else {
+    port.postMessage(message);
+  }
+
+  return false; 
+};
+window.addEventListener('DOMContentLoaded', function(e) {
+  window.addEventListener('message', function(evt) {
+    // 扩大端口范围
+    if (evt.origin == 'http://localhost') {
+      port = evt.ports[0];
+    } else {
+      alert(evt.origin +'这厮我不认识哈！');
+    } 
+  }, false);
+  
+  window.parent.postMessage('发送页加载完毕', 'http://localhost');
+  
+} ,false);
+</script> 
+</body>
+</html>

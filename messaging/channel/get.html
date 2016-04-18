@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Channel-Get" /> 
+<style> 
+</style>
+</head> 
+<body>
+<p id="J_message" class="p20">信息接受区域</p>
+<script>
+var eleBox = document.querySelector("#message");
+var messageHandle = function(e) {
+    eleBox.innerHTML = '接受到的信息是：' + e.data;
+};
+//
+
+//通道通信允许直接，双向浏览上下文之间的通信手段
+window.addEventListener('DOMContentLoaded', function() {
+    if (window.MessageChannel) {
+        //1、 创建一个新的 MessageChannel 对象
+        var mc = new MessageChannel();
+        //port具有三个方法，postMessage(),close().start();
+        // message作为DOM事件传递，不会阻塞进程
+        //2、port1端口被发送到其他上下文（父级窗口） 
+        var otherWindow = window.parent;
+        otherWindow.postMessage('显示页加载完毕','http://localhost',[mc.port1]);
+        
+        // port2作为本地发送端
+        //3、显示发送的信息 
+        mc.port2.addEventListener('message', messageHandle, false);
+        mc.port2.start();//启动事件分派
+    } else {
+        eleBox.innerHTML = '<p class="co">您的浏览器不支持通道通信。</p>';  
+    }
+}, false);
+</script>
+</body>
+</html>

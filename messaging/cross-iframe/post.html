@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="description" content="web通信之跨文档通信-POST" /> 
+</head>
+<body> 
+  <form id="J_form">
+    <p><input type="text" id="J_msgInput" placeholder="随便写点什么" required="" autofocus=""></p>
+    <input type="submit" value="确认">
+  </form>
+<script type="text/javascript">
+  var message = "Hello there",
+    eleForm = document.querySelector("J_form");
+  eleForm.onsubmit = function() {
+      var message = document.getElementById("J_msgInput").value;
+      // 这里是关键，发送信息
+      window.parent.frames[1].postMessage(message, '*');
+      return false;    
+  }
+</script>
+</body>
+</html>
